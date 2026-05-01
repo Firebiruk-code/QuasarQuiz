@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuasarQuiz | Library</title>
+    <script src="https://kit.fontawesome.com/d0e02b045d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            padding-bottom: 50px;
+        }
+
+        .quiz-card {
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.6);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-top { display: flex; align-items: center; gap: 15px; }
+        .card-top i { font-size: 2rem; }
+        .card-text h3 { margin: 0; font-size: 1.1rem; color: #fff; }
+        .card-text small { color: #94a3b8; }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .difficulty-tag {
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+        }
+
+        .btn-enroll {
+            background: var(--accent-cyan);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-enroll:hover { filter: brightness(1.2); }
+
+        /* Subject Colors */
+        .color-astronomy { border-color: #a78bfa !important; } .color-astronomy i { color: #a78bfa; }
+        .color-math { border-color: #3b82f6 !important; } .color-math i { color: #3b82f6; }
+        .color-english { border-color: #f43f5e !important; } .color-english i { color: #f43f5e; }
+        .color-geography { border-color: #10b981 !important; } .color-geography i { color: #10b981; }
+        .color-history { border-color: #f59e0b !important; } .color-history i { color: #f59e0b; }
+        .color-physics { border-color: #4ade80 !important; } .color-physics i { color: #4ade80; }
+        .color-chemistry { border-color: #8b5cf6 !important; } .color-chemistry i { color: #8b5cf6; }
+        .color-biology { border-color: #ec4899 !important; } .color-biology i { color: #ec4899; }
+        .color-tech { border-color: #06b6d4 !important; } .color-tech i { color: #06b6d4; }
+        .color-sports { border-color: #fb923c !important; } .color-sports i { color: #fb923c; }
+        .color-music { border-color: #6366f1 !important; } .color-music i { color: #6366f1; }
+        .color-literature { border-color: #94a3b8 !important; } .color-literature i { color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="logo"><span class="logo-icon">Q</span> QuasarQuiz</div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-list-check"></i> My Quizzes</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+            <a href="library.html" class="nav-item active"><i class="fa-solid fa-book-open"></i> Library</a>
+        </div>
+        <div class="user-profile-bottom">
+            <div class="user-info">
+                <img src="https://pravatar.cc" class="avatar">
+                <span class="username">User Name</span>
+            </div>
+            <a href="#" class="settings-link"><i class="fa-solid fa-gear"></i></a>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header>
+            <h1>Quiz Library</h1>
+            <p class="subtitle">36 Quizzes available across 12 disciplines.</p>
+        </header>
+
+        <section class="library-grid" id="quiz-container">
+            <!-- Quizzes injected via script -->
+        </section>
+    </main>
+
+    <script>
+        const subjects = [
+            { name: "Astronomy", icon: "fa-user-astronaut", class: "color-astronomy" },
+            { name: "Mathematics", icon: "fa-calculator", class: "color-math" },
+            { name: "English", icon: "fa-pen-nib", class: "color-english" },
+            { name: "Geography", icon: "fa-earth-americas", class: "color-geography" },
+            { name: "History", icon: "fa-landmark", class: "color-history" },
+            { name: "Physics", icon: "fa-atom", class: "color-physics" },
+            { name: "Chemistry", icon: "fa-flask-vial", class: "color-chemistry" },
+            { name: "Biology", icon: "fa-dna", class: "color-biology" },
+            { name: "Technology", icon: "fa-microchip", class: "color-tech" },
+            { name: "Sports", icon: "fa-basketball", class: "color-sports" },
+            { name: "Music", icon: "fa-music", class: "color-music" },
+            { name: "Literature", icon: "fa-book-open", class: "color-literature" }
+        ];
+
+        const difficulties = ["Easy", "Medium", "Hard"];
+        const container = document.getElementById('quiz-container');
+
+        subjects.forEach(sub => {
+            difficulties.forEach(diff => {
+                const card = document.createElement('div');
+                card.className = `quiz-card ${sub.class}`;
+                card.innerHTML = `
+                    <div class="card-top">
+                        <i class="fa-solid ${sub.icon}"></i>
+                        <div class="card-text">
+                            <h3>${sub.name}</h3>
+                            <small>By Quasar Team</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <span class="difficulty-tag">${diff}</span>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <button class="btn-enroll">Enroll Now</button>
+                `;
+
+                // Add redirect logic to the button
+                const btn = card.querySelector('.btn-enroll');
+                btn.addEventListener('click', () => {
+                    window.location.href = `quiz.html?subject=${encodeURIComponent(sub.name)}&level=${encodeURIComponent(diff)}`;
+                });
+
+                container.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

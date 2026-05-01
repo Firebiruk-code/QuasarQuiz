@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuasarQuiz Dashboard</title>
+    <script src="https://kit.fontawesome.com/d0e02b045d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        /*Sign Out Button Style*/
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .btn-signout {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-signout:hover {
+            background-color: #ef4444;
+            color: white;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }</style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">Q</span> QuasarQuiz
+        </div>
+        
+        <!-- Main Navigation -->
+        <div class="nav-links">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-list-check"></i> My Quizzes</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+            <a href="library.html" class="nav-item"><i class="fa-solid fa-book-open"></i> Library</a>
+        </div>
+
+        <!-- NEW: User Profile Section at the bottom -->
+        <div class="user-profile-bottom">
+            <div class="user-info">
+                <img src="https://pravatar.cc" alt="Avatar" class="avatar">
+                <span class="username">User Name</span>
+            </div>
+            <a href="#" class="settings-link">
+                <i class="fa-solid fa-gear"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header>
+            <h1>Welcome back!</h1>
+            <p class="subtitle">Your knowledge journey continues.</p>
+            <button id="mainSignOutBtn" class="btn-signout">
+                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+            </button>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <i class="fa-solid fa-layer-group"></i>
+                <p>Total Quizzes</p>
+                <div class="stat-value">24</div>
+                <small>Completed</small>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-bullseye"></i>
+                <p>Average Score</p>
+                <div class="stat-value">88%</div>
+                <small>Success Rate</small>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-ranking-star"></i>
+                <p>Global Rank</p>
+                <div class="stat-value">#412</div>
+                <small>Out of 12,500+ students</small>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <div class="section-header">
+                <h3>Your Active Quizzes</h3>
+                <button class="btn-new">+ Start New Quiz</button>
+            </div>
+
+            <div class="quiz-row">
+                <div class="quiz-info">
+                    <i class="fa-brands fa-python python-icon"></i>
+                    <span>Intro to Python II</span>
+                </div>
+                <div class="quiz-actions">
+                    <button class="btn-start">Start</button>
+                    <button class="btn-outline">Review</button>
+                </div>
+            </div>
+
+            <div class="quiz-row">
+                <div class="quiz-info">
+                    <i class="fa-solid fa-earth-americas geo-icon"></i>
+                    <span>World Geography</span>
+                </div>
+                <div class="quiz-actions">
+                    <button class="btn-start">Start</button>
+                    <button class="btn-outline">Review</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAB-qPb2jGgFeQ1fWmbdQjSfSA1aVI_sGM",
+            authDomain: "quasarquiz-67182.firebaseapp.com",
+            projectId: "quasarquiz-67182",
+            storageBucket: "quasarquiz-67182.firebasestorage.app",
+            messagingSenderId: "73804448760",
+            appId: "1:73804448760:web:d4c016b6e76b66463a0c0d"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Sign Out Logic
+        document.getElementById('mainSignOutBtn').addEventListener('click', () => {
+            firebase.auth().signOut().then(() => {
+                window.location.href = 'index.html'; // Redirect to login page
+            }).catch((error) => {
+                alert("Error signing out: " + error.message);
+            });
+        });
+
+        // Observer to update username
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                document.querySelector('.username').innerText = user.email.split('@')[0];
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

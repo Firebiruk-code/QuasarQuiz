@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuasarQuiz | Exam Mode</title>
+    <<script src="https://kit.fontawesome.com/d0e02b045d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo"><span class="logo-icon"></span>QuasarQuiz</div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+             <a href="#" class="nav-item"><i class="fa-solid fa-list-check"></i> My Quizzes</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+            <a href="library.html" class="nav-item active"><i class="fa-solid fa-book-open"></i> Library</a>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="quiz-container">
+            <!-- HEADER: Title & Dots on Left, Timer on Right -->
+            <div class="header-top">
+                <div class="header-left">
+                    <h1 id="quiz-title">Subject Quiz</h1>
+                    <div id="question-dots" class="dots-container"></div>
+                </div>
+                <div class="timer-badge">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="timer">10:00</span>
+                </div>
+            </div>
+
+            <div class="progress-bar-bg">
+                <div id="progressBar" class="progress-bar-fill"></div>
+            </div>
+
+            <div id="quizBody">
+                <div class="question-section">
+                    <p id="questionNum" class="progress-info">Question 1/10</p>
+                    <h2 id="questionText" class="question-text">Loading your question...</h2>
+                    <div class="options-grid" id="optionsContainer"></div>
+                </div>
+
+                <div class="quiz-footer">
+                    <button id="prevBtn" class="btn secondary">
+                        <i class="fa-solid fa-chevron-left"></i> Back
+                    </button>
+                    <button id="nextBtn" class="btn">
+                        Next <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script type="text/template" id="resultsTemplate">
+        <div class="question-box results-card">
+            <i class="fa-solid fa-trophy trophy-icon"></i>
+            <h1>Exam Submitted</h1>
+            <div id="finalPercentage" class="big-score">0%</div>
+            <p id="finalScoreText"></p>
+            <div class="results-actions">
+                <button class="btn-start" onclick="startReview()">Review Answers</button>
+                <button class="btn-outline" onclick="window.location.href='library.html'">Exit to Library</button>
+            </div>
+        </div>
+    </script>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
