@@ -77,16 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             console.log("Logged in as:", user.email);
-            
-            // Get current file name
-            const path = window.location.pathname;
-            const page = path.split("/").pop();
-
-            // Only redirect if the user is on the login/landing page
-            // Adjust 'login.html' or 'index.html' to match your actual file names
-            if (page === 'login.html') {
-                window.location.href = 'dashboard.html';
-            }
+            window.location.href = 'dashboard.html';
         }
     });
 });
