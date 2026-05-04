@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard | QuasarQuiz</title>
+    <script src="https://kit.fontawesome.com/d0e02b045d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .coming-soon-container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .coming-soon-container i {
+            font-size: 4rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
+        }
+
+        .coming-soon-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .coming-soon-text {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">Q</span>uasarQuiz
+        </div>
+        
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+            <a href="myquizzes.html" class="nav-item"><i class="fa-solid fa-list-check"></i> My Quizzes</a>
+            <a href="leaderboard.html" class="nav-item active"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+            <a href="library.html" class="nav-item"><i class="fa-solid fa-book-open"></i> Library</a>
+        </div>
+
+        <div class="user-profile-bottom">
+            <div class="user-info">
+                <img src="https://pravatar.cc" alt="Avatar" class="avatar">
+                <span class="username">User Name</span>
+            </div>
+            <a href="#" class="settings-link">
+                <i class="fa-solid fa-gear"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="coming-soon-container">
+            <i class="fa-solid fa-rocket"></i>
+            <h1 class="coming-soon-title">Coming Soon</h1>
+            <p class="coming-soon-text">We're building a global stage for the brightest minds. Stay tuned for real-time rankings and rewards!</p>
+        </div>
+    </main>
+</body>
+</html>
