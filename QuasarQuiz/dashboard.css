@@ -14,6 +14,8 @@ body {
     display: flex;
     margin: 0;
     height: 100vh;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
 }
 
 /* Sidebar Update */
@@ -29,12 +31,27 @@ body {
 
 .logo {
     font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--accent-cyan);
-    margin-bottom: 30px;
+    font-weight: 700;
+    color: var(--text-main);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 2px;
+    margin-bottom: 30px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: translateY(-3px);
+}
+
+.logo span {
+    background: var(--accent-cyan);
+    background: linear-gradient(to bottom right, var(--accent-cyan), #ffffff); /* Optional: adds a slight white shine to the top */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800; /* Extra bold for the 'Q' */
 }
 
 .nav-links {
